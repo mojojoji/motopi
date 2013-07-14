@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>MOTO PI Client Controller</title>
+<meta name="viewport" content="width=device-width, user-scalable=no" />
+<meta name="HandheldFriendly" content="True" />
+<style type="text/css">
+	input[type="button"]
+	{
+		padding: 20px;
+		border: none;
+		border-radius: 5px;
+		background-color: #dd0000;
+		color: #fff;
+		font-size: 20px;
+		font-weight: bold;
+		margin: 20px;
+	}
+</style>
+
+</head>
+
+<body>
+	<input type = "button" value="Forward" onclick="forward()">
+	<input type = "button" value="Backward" onclick="backward()">
+	<input type = "button" value="Left" onclick="left()">
+	<input type = "button" value="Right" onclick="right()">
+	<input type = "button" value="Stop" onclick="stop()">
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript">
+	function forward()
+	{
+		$.get("/forward/",{},function(){
+			console.log("forward");
+		});
+	}
+	function backward()
+	{
+		$.get("/backward/",{},function(){
+			console.log("backward");
+		});
+	}
+	function left()
+	{
+		$.get("/left/",{},function(){
+			console.log("left");
+		});
+	}
+	function right()
+	{
+		$.get("/right/",{},function(){
+			console.log("right");
+		});
+	}
+	function rotateCCW()
+	{
+		$.get("/rotateCCW/",{},function(){
+			console.log("CCW");
+		});
+	}
+	function stop()
+	{
+		$.get("/stop/",{},function(){
+			console.log("stop");
+		});
+	}
+</script>
+
+
+
+</body>
+
+</html>
