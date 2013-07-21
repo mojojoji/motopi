@@ -22,13 +22,13 @@ var Direction = {
 	STOP : 4
 };
 
-this.moving = Direction.STOP;
+var moving = Direction.STOP;
 
 exports.turnRight = function(){
 	if(permitted.right){
 		leftMotor.rotateCCW();
 		rightMotor.rotateCCW();
-		this.moving = Direction.RIGHT;
+		moving = Direction.RIGHT;
 	}
 }
 
@@ -36,7 +36,7 @@ exports.turnLeft = function(){
 	if(permitted.left){
 		leftMotor.rotateCW();
 		rightMotor.rotateCW();
-		this.moving = Direction.LEFT;
+		moving = Direction.LEFT;
 	}
 }
 
@@ -44,7 +44,7 @@ exports.moveForward = function(){
 	if(permitted.forward){
 		leftMotor.rotateCCW();
 		rightMotor.rotateCW();
-		this.moving = Direction.FORWARD;
+		moving = Direction.FORWARD;
 	}
 }
 
@@ -52,27 +52,28 @@ exports.moveBackward = function(){
 	if(permitted.backward){
 		leftMotor.rotateCW();
 		rightMotor.rotateCCW();
-		this.moving = Direction.BACKWARD;
+		moving = Direction.BACKWARD;
 	}
 }
 
 exports.stop = function(){
 	leftMotor.stopRotate();
 	rightMotor.stopRotate();
-	this.moving = Direction.STOP;
+	moving = Direction.STOP;
 }
 
 
 leftSensor.startSense(function(value){
-	console.log(value);
+	
 	if(value === 1){
 		permitted.forward = false;
+		console.log(moving);
 	}
 	else{
 		permitted.forward = true;
 	}
 
-	if(this.moving === Direction.FORWARD){
+	if(moving === Direction.FORWARD){
 		exports.stop();
 	}
 
