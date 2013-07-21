@@ -64,10 +64,9 @@ exports.stop = function(){
 
 
 leftSensor.startSense(function(value){
-	
+	console.log(moving);
 	if(value === 1){
 		permitted.forward = false;
-		console.log(moving);
 	}
 	else{
 		permitted.forward = true;
