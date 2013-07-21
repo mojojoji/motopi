@@ -10,22 +10,27 @@ var client = function(req, res){
 
 var forward = function(req, res){
 	MotoPi.moveForward();
+	res.end('DONE');
 };
 
 var backward = function(req, res){
 	MotoPi.moveBackward();
+	res.end('DONE');
 };
 
 var left = function(req, res){
 	MotoPi.turnLeft();
+	res.end('DONE');
 };
 
 var right = function(req, res){
 	MotoPi.turnRight();
+	res.end('DONE');
 };
 
 var stop = function(req, res){
 	MotoPi.stop();
+	res.end('DONE');
 };
 
 
