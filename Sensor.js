@@ -18,7 +18,7 @@
 	}
 
 	this.startSense = function(callback){
-		setPin(tempVCC,1,function(){
+		RaspPi.setPin(tempVCC,1,function(){
 			this.callback =callback;
 		 	senseLoop = setInterval(loop,SENSE_TIME);
 		});
