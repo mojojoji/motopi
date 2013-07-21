@@ -67,13 +67,14 @@ leftSensor.startSense(function(value){
 	console.log(moving);
 	if(value === 1){
 		permitted.forward = false;
+		if(moving === Direction.FORWARD){
+			exports.stop();
+		}
 	}
 	else{
 		permitted.forward = true;
 	}
 
-	if(moving === Direction.FORWARD){
-		exports.stop();
-	}
+	
 
 });
