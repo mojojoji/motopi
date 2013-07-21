@@ -1,21 +1,8 @@
 var express = require('express');
 var app = express();
-var port = process.env.PORT || port;
+var port = process.env.PORT || 500;
 
 var MotoPi = require('./MotoPi.js');
-
-exports.start = function()
-{
-	app.get('/forward/',forward);
-	app.get('/backward/', backward);
-	app.get('/left/', left);
-	app.get('/right/', right);
-	app.get('/stop/', stop);
-
-	//Serve the UI
-	app.get('/', client);
-	app.listen(port);
-}
 
 var client = function(req, res){
   	res.sendfile(__dirname + '/motopi_client.html');
@@ -40,4 +27,21 @@ var right = function(req, res){
 var stop = function(req, res){
 	MotoPi.stop();
 };
+
+
+exports.start = function()
+{
+	app.get('/forward/',forward);
+	app.get('/backward/', backward);
+	app.get('/left/', left);
+	app.get('/right/', right);
+	app.get('/stop/', stop);
+
+	//Serve the UI
+	app.get('/', client);
+
+	console.log('Listening to port 5000');
+	app.listen(port);
+}
+
 
