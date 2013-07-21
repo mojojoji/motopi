@@ -4,35 +4,68 @@ var gpio = require("pi-gpio");
 var CWPIN = [7,16];
 var CCWPIN = [11,15];
 
+var isLeftObstacle = false;
+
 var app = express();
 
+var loop = setInterval(loop,100);
+
+function loop()
+{
+    console.log('sensing...');
+    console.log('Left sensor found obstacle :'+isLeftObstacle );
+}
+
 app.get('/forward/', function(req, res){
-    CW(0);
-    CCW(1);
+    if(!isLeftObstacle)
+    {
+       forward();
+    }
+    else
+    {
+
+    }    
     res.end('DONE');
 });
 
 app.get('/backward/', function(req, res){
-    CW(1);
-    CCW(0);
+    if(!isLeftObstacle)
+    {
+       backward();
+    }
+    else
+    {
+
+    }    
     res.end('DONE');
 });
 
 app.get('/left/', function(req, res){
-    CW(0);
-    CW(1);
+     if(!isLeftObstacle)
+    {
+       left();
+    }
+    else
+    {
+
+    }    
     res.end('DONE');
 });
 
 app.get('/right/', function(req, res){
-    CCW(1);
-    CCW(0);
+    if(!isLeftObstacle)
+    {
+       right();
+    }
+    else
+    {
+
+    }    
     res.end('DONE');
 });
 
 app.get('/stop/', function(req, res){
-    stop(0);
-    stop(1);
+    stop();
     res.end('DONE');
 });
 
@@ -40,6 +73,32 @@ app.get('/stop/', function(req, res){
 app.get('/', function(req, res){
   res.sendfile(__dirname + '/motopi_client.html');
 });
+
+function forward()
+{
+    CW(0);
+    CCW(1);
+}
+function backward()
+{
+    CW(1);
+    CCW(0);
+}
+function left()
+{
+    CW(0);
+    CW(1);
+}
+function right()
+{
+    CCW(1);
+    CCW(0);
+}
+function stop()
+{
+    stop(0);
+    stop(1);
+}
 
 var port = process.env.PORT || 5000;
 app.listen(port);
@@ -77,10 +136,3 @@ function setPin(pin,state,callback)
 	});
 }
 
-/*CW();
-setTimeout(function(){
-	CCW();
-	setTimeout(function(){
-		stop();
-	},2000);	
-},2000)*/
