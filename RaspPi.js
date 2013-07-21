@@ -15,7 +15,6 @@ exports.getPin = function(pin,callback)
 {
     gpio.open(pin, "input", function(err) {        
             gpio.read(pin, function(err, value) {
-                console.log(value);
                 if(callback)
                     callback(value);
             });

@@ -1,10 +1,15 @@
 
-var Motor = require('./Motor.js')
+var Motor = require('./Motor.js');
+var Sensor = require('./Sensor.js');
 
 var leftMotor = new Motor(16,15);
 var rightMotor = new Motor(7,11);
 
-//Sensor also add here
+var leftSensor = new Sensor(18);
+
+leftSensor.startSense(function(value){
+	console.log(value);
+});
 
 exports.turnRight = function(){
 	leftMotor.rotateCCW();
