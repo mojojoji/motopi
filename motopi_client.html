@@ -20,11 +20,11 @@
 </head>
 
 <body>
-	<input type = "button" value="Forward" onclick="forward()">
-	<input type = "button" value="Backward" onclick="backward()">
-	<input type = "button" value="Left" onclick="left()">
-	<input type = "button" value="Right" onclick="right()">
-	<input type = "button" value="Stop" onclick="stop()">
+	<input type = "button" value="Forward" onmousedown="forward()" onmouseup="stop()">
+	<input type = "button" value="Backward" onmousedown="backward()" onmouseup="stop()">
+	<input type = "button" value="Left" onmousedown="left()" onmouseup="stop()">
+	<input type = "button" value="Right" onmousedown="right()" onmouseup="stop()">
+	<input type = "button" value="Stop" onmousedown="stop()">
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script type="text/javascript">
