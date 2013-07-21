@@ -7,31 +7,73 @@ var rightMotor = new Motor(7,11);
 
 var leftSensor = new Sensor(18);
 
-leftSensor.startSense(function(value){
-	console.log(value);
-});
+var permitted = {
+	forward : true,
+	backward : true,
+	left : true,
+	right : true
+}
+
+var Direction = { 
+	FORWARD : 0,
+	BACKWARD : 1,
+	LEFT : 2,
+	RIGHT : 3,
+	STOP : 4
+};
+
+this.moving = Direction.STOP;
 
 exports.turnRight = function(){
-	leftMotor.rotateCCW();
-	rightMotor.rotateCCW()
+	if(permitted.right){
+		leftMotor.rotateCCW();
+		rightMotor.rotateCCW();
+		this.moving = Direction.RIGHT;
+	}
 }
 
 exports.turnLeft = function(){
-	leftMotor.rotateCW();
-	rightMotor.rotateCW()
+	if(permitted.left){
+		leftMotor.rotateCW();
+		rightMotor.rotateCW();
+		this.moving = Direction.LEFT;
+	}
 }
 
 exports.moveForward = function(){
-	leftMotor.rotateCCW();
-	rightMotor.rotateCW()
+	if(permitted.forward){
+		leftMotor.rotateCCW();
+		rightMotor.rotateCW();
+		this.moving = Direction.FORWARD;
+	}
 }
 
 exports.moveBackward = function(){
-	leftMotor.rotateCW();
-	rightMotor.rotateCCW()
+	if(permitted.backward){
+		leftMotor.rotateCW();
+		rightMotor.rotateCCW();
+		this.moving = Direction.BACKWARD;
+	}
 }
 
 exports.stop = function(){
 	leftMotor.stopRotate();
-	rightMotor.stopRotate()
+	rightMotor.stopRotate();
+	this.moving = Direction.STOP;
 }
+
+
+leftSensor.startSense(function(value){
+	console.log(value);
+	if(value === 1){
+		permitted.forward = false;
+	}
+	else{
+		permitted.forward = true;
+	}
+
+	if(this.moving === Direction.FORWARD){
+		exports.stop();
+	}
+
+});
